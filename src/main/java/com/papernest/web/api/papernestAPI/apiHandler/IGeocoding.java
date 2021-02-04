@@ -7,6 +7,6 @@ import com.papernest.web.api.papernestAPI.dto.Coordinate;
 
 public interface IGeocoding {
 
-	public Coordinate getPosition(String adrs) throws IOException, InterruptedException;
+	public List<Coordinate> getPosition(String adrs) throws IOException, InterruptedException;
 	
 }

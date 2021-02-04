@@ -24,13 +24,12 @@ import org.apache.log4j.Logger;
 @RestController
 public class NetworkCoverageController {
 
-	public static void main(String[] args) throws IOException, InterruptedException {
-		NetworkCoverageController controller = new NetworkCoverageController();
-		System.out.println(controller.getOperatorsCoverages("66 rue jean jaures puteaux"));
-
-	}
-
 	private static Logger logger = Logger.getLogger(NetworkCoverageController.class);
+	
+	private static final String ORNAGE = "20801";
+	private static final String SFR = "20810";
+	private static final String FREE = "20815";
+	private static final String BOUYGUE = "20820";
 	
 	//@Autowired
 	//IGeocoding geocodingHandler;
@@ -44,40 +43,35 @@ public class NetworkCoverageController {
 		List<Coverage> coverages = CSVReaderHandler.readCoveragesFromCSV();
 		Operators operators = new Operators();
 		
-		Coordinate coordinate = geocodingHandler.getPosition(address);
-		int x = (int) Double.parseDouble(coordinate.getX());
-		int y = (int) Double.parseDouble(coordinate.getY());
+		List<Coordinate> coordinates = geocodingHandler.getPosition(address);
 		
-		System.out.println("your address cordinate are "+coordinate);
-		
+	for(Coordinate coordinate:coordinates) {
 		for(Coverage coverage:coverages) {
-			switch(coverage.getOperateur()) {
-			//Orange  
-			case "20801":
-				if(Integer.parseInt(coverage.getX()) == x && Integer.parseInt(coverage.getY()) == y) {
+			switch(coverage.getOperateur()) { 
+			case ORNAGE:
+				if(Integer.parseInt(coverage.getX()) == coordinate.getX() && Integer.parseInt(coverage.getY()) == coordinate.getY() && operators.getOrange() == null) {
 					operators.setOrange(new Operator(coverage.isTwoG(), coverage.isTreeG(), coverage.isFourG()));
+					break;
 				}
-				break;
-			//SFR  
-			case "20810":
-				if(Integer.parseInt(coverage.getX()) == x && Integer.parseInt(coverage.getY()) == y) {
+			case SFR:
+				if(Integer.parseInt(coverage.getX()) == coordinate.getX() && Integer.parseInt(coverage.getY()) == coordinate.getY() && operators.getSFR() == null) {
 					operators.setSFR(new Operator(coverage.isTwoG(), coverage.isTreeG(), coverage.isFourG()));
+					break;
 				}
-			    break;
-			//Free
-			case "20815":
-				if(Integer.parseInt(coverage.getX()) == x && Integer.parseInt(coverage.getY()) == y) {
+			case FREE:
+				if(Integer.parseInt(coverage.getX()) == coordinate.getX() && Integer.parseInt(coverage.getY()) == coordinate.getY() && operators.getFree() == null) {
 					operators.setFree(new Operator(coverage.isTwoG(), coverage.isTreeG(), coverage.isFourG()));
+					break;
 				}
-				break;
-			//Bouygue  
-			case "20820":
-				if(Integer.parseInt(coverage.getX()) == x && Integer.parseInt(coverage.getY()) == y) {
+			case BOUYGUE:
+				if(Integer.parseInt(coverage.getX()) == coordinate.getX() && Integer.parseInt(coverage.getY()) == coordinate.getY() && operators.getBouygue() == null) {
 					operators.setBouygue(new Operator(coverage.isTwoG(), coverage.isTreeG(), coverage.isFourG()));
+					break;
 				}
-				 break;
 			}
 		}
+	}
+		
 		
 		return operators;
 	}

@@ -2,10 +2,10 @@ package com.papernest.web.api.papernestAPI.dto;
 
 public class Coordinate {
 	
-	private String X;
-	private String Y;
+	private int X;
+	private int Y;
 	
-	public Coordinate(String x, String y) {
+	public Coordinate(int x, int y) {
 		super();
 		X = x;
 		Y = y;
@@ -16,16 +16,16 @@ public class Coordinate {
 	}
 
 
-	public String getX() {
+	public int getX() {
 		return X;
 	}
-	public void setX(String x) {
+	public void setX(int x) {
 		X = x;
 	}
-	public String getY() {
+	public int getY() {
 		return Y;
 	}
-	public void setY(String y) {
+	public void setY(int y) {
 		Y = y;
 	}
 	@Override

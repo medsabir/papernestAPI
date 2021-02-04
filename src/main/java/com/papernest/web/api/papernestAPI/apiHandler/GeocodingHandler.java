@@ -1,6 +1,8 @@
 package com.papernest.web.api.papernestAPI.apiHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,9 @@ public class GeocodingHandler implements IGeocoding{
 	ObjectMapper mapper = new ObjectMapper();
 	
 	@Override
-    public Coordinate getPosition(String adrs){
+    public List<Coordinate> getPosition(String adrs){
 		
-		Coordinate coordinate = new Coordinate();
+		List<Coordinate> coordinates = new ArrayList<>();
 		
 		try {
 			
@@ -38,16 +40,14 @@ public class GeocodingHandler implements IGeocoding{
 	            String lat = address.get("x").asText();
 	            String lng = address.get("y").asText();
 	            if(lat != null && lng != null) {
-	            	coordinate.setX(lat);
-	            	coordinate.setY(lng);
-	            	break;
+	            	coordinates.add(new Coordinate((int) Double.parseDouble(lat), (int) Double.parseDouble(lng)));
 	            }
 	            
 	        }
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
-		return coordinate;
+		return coordinates;
     }
 
 }
