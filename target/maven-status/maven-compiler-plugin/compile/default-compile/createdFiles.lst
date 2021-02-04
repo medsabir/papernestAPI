@@ -1,0 +1,10 @@
+com\papernest\web\api\papernestAPI\apiHandler\IGeocoding.class
+com\papernest\web\api\papernestAPI\apiHandler\CSVReaderHandler.class
+com\papernest\web\api\papernestAPI\apiHandler\GeocodingHandler.class
+com\papernest\web\api\papernestAPI\RestApiApplication.class
+com\papernest\web\api\papernestAPI\dto\Coverage.class
+com\papernest\web\api\papernestAPI\controllers\NetworkCoverageController.class
+com\papernest\web\api\papernestAPI\service\GeocoderService.class
+com\papernest\web\api\papernestAPI\dto\Operator.class
+com\papernest\web\api\papernestAPI\dto\Operators.class
+com\papernest\web\api\papernestAPI\dto\Coordinate.class
